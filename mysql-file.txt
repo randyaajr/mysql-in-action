@@ -1,13 +1,76 @@
-mysql> desc InvoiceLine;
-+---------------+---------------+------+-----+---------+----------------+
-| Field         | Type          | Null | Key | Default | Extra          |
-+---------------+---------------+------+-----+---------+----------------+
-| InvoiceLineId | int           | NO   | PRI | NULL    | auto_increment |
-| InvoiceId     | int           | NO   | MUL | NULL    |                |
-| TrackId       | int           | NO   | MUL | NULL    |                |
-| UnitPrice     | decimal(10,2) | NO   |     | NULL    |                |
-| Quantity      | int           | NO   |     | NULL    |                |
-+---------------+---------------+------+-----+---------+----------------+
+mysql> select * from Album limit 5;
++---------+---------------------------------------+----------+
+| AlbumId | Title                                 | ArtistId |
++---------+---------------------------------------+----------+
+|       1 | For Those About To Rock We Salute You |        1 |
+|       2 | Balls to the Wall                     |        2 |
+|       3 | Restless and Wild                     |        2 |
+|       4 | Let There Be Rock                     |        1 |
+|       5 | Big Ones                              |        3 |
++---------+---------------------------------------+----------+
 5 rows in set (0.00 sec)
 
-mysql> notee
+mysql> select Title, Name from Album
+    -> join Artist on Album.ArtistId = Artist.ArtistId
+    -> limit 5;
++---------------------------------------+-----------+
+| Title                                 | Name      |
++---------------------------------------+-----------+
+| For Those About To Rock We Salute You | AC/DC     |
+| Balls to the Wall                     | Accept    |
+| Restless and Wild                     | Accept    |
+| Let There Be Rock                     | AC/DC     |
+| Big Ones                              | Aerosmith |
++---------------------------------------+-----------+
+5 rows in set (0.01 sec)
+
+mysql> desc Genre;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| GenreId | int          | NO   | PRI | NULL    | auto_increment |
+| Name    | varchar(120) | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into Genre (Name) values ('Trad');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select last_insert_ID();
++------------------+
+| last_insert_ID() |
++------------------+
+|               26 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select Name from Genre where GenreId = 27;
+Empty set (0.00 sec)
+
+mysql> select Name from Genre where GenreId = 26;
++------+
+| Name |
++------+
+| Trad |
++------+
+1 row in set (0.00 sec)
+
+mysql> update Genre  set Name = 'Traditional' where Name = 'Trad';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select Name from Genre where GenreId = 26;
++-------------+
+| Name        |
++-------------+
+| Traditional |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> delete from Genre where Name = 'Traditional';
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select Name from Genre where GenreId = 26;
+Empty set (0.00 sec)
+
+mysql> quit;
