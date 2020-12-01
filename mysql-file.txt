@@ -1,0 +1,13 @@
+mysql> desc InvoiceLine;
++---------------+---------------+------+-----+---------+----------------+
+| Field         | Type          | Null | Key | Default | Extra          |
++---------------+---------------+------+-----+---------+----------------+
+| InvoiceLineId | int           | NO   | PRI | NULL    | auto_increment |
+| InvoiceId     | int           | NO   | MUL | NULL    |                |
+| TrackId       | int           | NO   | MUL | NULL    |                |
+| UnitPrice     | decimal(10,2) | NO   |     | NULL    |                |
+| Quantity      | int           | NO   |     | NULL    |                |
++---------------+---------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> notee
