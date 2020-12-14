@@ -14,9 +14,9 @@ connection = pymysql.connect(host='localhost',
 
 try:
     with connection.cursor() as cursor:
-        cursor.execute("""CREATE TABLE IF NOT EXISTS
-                          Friends(name char(20), age int, DOB datetime);""")
-        # Note that the above will still display a warning (not error) if the
-        # table already exists
+        list_of_names = ['fred', 'fred', 'steve']
+        format_strings = ','.join(['%s']*len(list_of_names))
+        cursor.execute("DELETE FROM Friends WHERE Name IN ({});".format(format_strings), list_of_names)
+        connection.commit()
 finally:
     connection.close()
